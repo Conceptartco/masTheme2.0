@@ -1,0 +1,30 @@
+{#
+| Variable                       | Type     | Description                                         |
+|--------------------------------|----------|-----------------------------------------------------|
+| page                           | object   |                                                     |
+| page.title                     | string   |                                                     |
+| page.slug                      | string   |                                                     |
+#}
+{% extends "layouts.customer" %}
+{% block inner_content %}
+	<div class="container mx-auto px-4 py-8">
+
+		{% hook 'customer:profile.form.start' %}
+
+		<!-- Salla User Profile Component -->
+		<salla-user-profile></salla-user-profile>
+
+		{% hook 'customer:profile.form.end' %}
+
+		<!-- Salla Verify Component -->
+		<div class="mt-10">
+			<salla-verify></salla-verify>
+		</div>
+
+		<!-- Salla User Settings Component -->
+		<div class="mt-10">
+			<salla-user-settings {{ user.is_notifiable ? 'is-notifiable' : '' }} class="block"></salla-user-settings>
+		</div>
+
+	</div>
+{% endblock %}

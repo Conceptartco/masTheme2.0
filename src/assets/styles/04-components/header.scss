@@ -1,0 +1,99 @@
+
+// contacs menu items - pages menu items
+.topnav-link-item{
+  @apply inline-block transition duration-300 px-4 rtl:last:pl-0 ltr:last:pr-0 py-px text-sm leading-none ltr:border-r rtl:border-l border-gray-200 ltr:last:border-0 rtl:last:border-0 hover:opacity-80;
+
+  &.right-side{
+    @apply rtl:first:pr-0 ltr:first:pl-0
+  }
+}/* Main Nav */
+.main-nav-container {
+  @apply min-h-[68px] lg:min-h-[84px];
+  background-color: rgba(255, 255, 255, 0.5); /* لون أبيض مع شفافية خفيفة */
+  
+  /* Custom background Color */
+  .has-bg &,
+  .has-bg & .sub-menu {
+    @apply bg-white bg-opacity-80; /* تعيين الشفافية الخفيفة */
+  }
+
+  /* Custom text color */
+  .has-text-color & {
+    @apply text-[color:var(--mainnav-text-color)];
+  }
+}
+
+/* Sticky Header */
+.main-nav-container {
+  &.fixed-header {
+    position: fixed; /* لتثبيت الهيدر */
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* التأكد من أن الهيدر فوق جميع العناصر الأخرى */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.8); /* خلفية بيضاء مع شفافية خفيفة */
+  }
+}
+
+/* Content Area */
+.content-area {
+  margin-top: 68px; /* أو القيمة المناسبة لتجنب تداخل المحتوى مع الهيدر */
+}
+
+
+
+
+.navbar-brand {
+  @apply items-center flex my-2 lg:my-0;
+
+  img {
+    @apply w-auto max-h-12 max-w-[100px] xs:max-w-[170px];
+  }
+}
+
+// Mainnav cart icon
+.header-btn{
+  @apply border-none outline-none transition-opacity hover:opacity-80;
+
+  &__icon{
+    @apply text-xl w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-700;
+    &.icon{
+      @apply mr-[9px] rtl:ml-[9px] rtl:mr-[unset];
+    }
+  }
+}
+
+salla-user-menu{
+  @apply shrink-0;
+}
+
+// cart summary
+.s-cart-summary-total{
+  @apply text-black font-[600];
+}
+
+.s-cart-summary-count{
+  @apply -top-0.5 ltr:-left-1.5 rtl:-right-1.5 bg-red-800;
+}
+
+#nav-cart{
+  @apply flex items-center rtl:mr-4 ltr:ml-4 relative whitespace-nowrap;
+
+  .icon{
+    @apply rtl:ml-2 ltr:mr-2;
+  }
+
+  span{
+    @apply absolute top-1 rtl:-right-2 ltr:-left-2;
+  }
+}
+
+
+// Search
+.header-search{
+  .s-search-results{
+    @apply z-10;
+  }
+}

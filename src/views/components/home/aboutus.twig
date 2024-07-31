@@ -1,0 +1,32 @@
+<div class="flex mr-10 flex-col md:flex-row justify-center items-center my-5">
+	<div
+		class="flex flex-col md:flex-row p-3 w-full max-w-6xl">
+		<!-- النصوص -->
+		<div class="flex-1 text-right p-4 mb-6 md:mb-0 flex flex-col justify-between">
+			<div>
+				<h1 class="text-4xl md:text-5xl mb-4 font-slim">{{ component.aboutus_title }}</h1>
+				<h1 class="text-4xl md:text-5xl mb-4 font-slim">
+
+					<span class="custom-color">
+						{{ component.aboutus_subtitle_golden }}
+					</span>
+				</h1>
+				<p class="mb-6 pt-5 text-justify text-lg md:text-lg">{{ component.aboutus_paragraph }}</p>
+			</div>
+			<div class="flex justify-center mt-5">
+				<a href="{{ component.aboutus_url_for_page }}" class="zbyz text-lg md:text-lg">
+					من نحن
+				</a>
+			</div>
+		</div>
+		<!-- الفيديو -->
+		<div class="flex-1 p-4 flex justify-center items-center">
+			<div class="relative w-full h-full">
+				<video class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline>
+					<source src={{component.video_url_aboutus_new}} type="video/mp4">
+					متصفحك لا يدعم عنصر الفيديو.
+				</video>
+			</div>
+		</div>
+	</div>
+</div>

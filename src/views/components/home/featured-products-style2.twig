@@ -1,0 +1,21 @@
+{% set component_id='featured-products-style2-' ~ position %}
+{% set is_vertical = theme.settings.get('vertical_fixed_products', true) %}
+<section class="py-10 px-10 mt-20 sm:py-16 nickless-background" id="{{ component_id }}">
+	<div class="container mx-auto">
+		<div class="tabs hide-scroll mb-8">
+			{% for section in items %}
+				<h1 class="text-right text-4xl sm:text-5xl font-light mr-5">{{ section.title }}</h1>
+			{% endfor %}
+		</div>
+
+		<div class="px-5">
+			{% for section in items %}
+				<div id="{{ component_id }}-{{ section.id }}" class="{{ loop.first ? 'block' : 'hidden' }}">
+					<div class="flex flex-wrap gap-4">
+						<salla-products-list product-card-component="custom-product-card" source-value="[{{ section.products|map((product) => product.id)|join(',') }}]"></salla-products-list>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
