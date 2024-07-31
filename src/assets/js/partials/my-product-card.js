@@ -50,8 +50,18 @@ class CustomProductCard extends HTMLElement {
             max-width: 100%;
             box-sizing: border-box;
           }
-
-          
+              .custom-product-promotion-title {
+      margin-left: 3vh !important;
+      rotate:  -90deg !important;
+      margin-top: 5vh !important;
+      position: absolute !important;
+      top: 16px !important;
+      left: 16px !important;
+      color: #a5804a !important;
+      font-size: 2em !important;
+      display: block !important;
+      transition: display 0.5s ease !important;
+  }
         </style>
       </head>
       <div class="custom-product-card">
