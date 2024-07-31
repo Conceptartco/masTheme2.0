@@ -180,16 +180,16 @@ class CustomProductCard extends HTMLElement {
           }
           
           .custom-product-promotion-title {
-              MARGIN-LEFT: -3VH;
-              ROTATE: -90DEG;
-              MARGIN-TOP: 5VH;
-              position: absolute;
-              top: 16px;
-              left: 16px;
-              color: #a5804a;
-              font-size: 2em;
-              display: block;
-              transition: display 0.5s ease;
+              MARGIN-LEFT: -3VH !important;
+              ROTATE: -90DEG !important;
+              MARGIN-TOP: 5VH !important;
+              position: absolute !important;
+              top: 16px !important;
+              left: 16px !important;
+              color: #a5804a !important;
+              font-size: 2em !important;
+              display: block !important;
+              transition: display 0.5s ease !important;
           }
 
           .s-product-card-wishlist-btn {
