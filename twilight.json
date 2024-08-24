@@ -1,9 +1,9 @@
 {
     "name": {
-        "ar": "ماس ارت",
-        "en": "MASART"
+        "ar": "ماس جول",
+        "en": "MASJEWL"
     },
-    "repository": "https://github.com/Conceptartco/mastheme3.0",
+    "repository": "https://github.com/Conceptartco/masTheme2.0",
     "author_email": "naderst2020@gmail.com",
     "features": [
         "component-featured-products",
