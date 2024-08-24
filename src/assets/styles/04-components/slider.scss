@@ -134,7 +134,24 @@ salla-slider.photos-slider {
   opacity: 0.5;
 }
 
+// bullet pagination -------
+salla-slider{
+  .swiper-pagination-bullet {
+    width: 20px;
+    border-radius: 5px;
+    background: #fff;
+    opacity: 0.3;
 
+    &-active {
+      opacity: 1;
+      background-color: var(--color-primary);
+    }
+  }
+
+  .swiper-pagination-bullets.swiper-pagination-horizontal{
+    @apply bottom-3 sm:bottom-6; 
+  }
+}
 
 
 // Offer slider

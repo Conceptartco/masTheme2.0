@@ -1,57 +1,25 @@
 {
     "name": {
-        "ar": "ماس جول",
-        "en": "MASJEWL"
+        "ar": "ماس ارت",
+        "en": "MASART"
     },
-    "repository": "https://github.com/Conceptartco/masTheme2.0",
+    "repository": "https://github.com/Conceptartco/mastheme3.0",
     "author_email": "naderst2020@gmail.com",
     "features": [
-        "mega-menu",
+        "component-featured-products",
         "component-fixed-banner",
         "component-fixed-products",
         "component-products-slider",
         "component-photos-slider",
+        "component-parallax-background",
+        "component-square-photos",
+        "component-store-features",
+        "component-youtube",
         "menu-images",
         "filters",
-        "component-featured-products"
+        "unite-cards-height"
     ],
-    "settings": [
-        {
-            "type": "boolean",
-            "icon": "sicon-toggle-off",
-            "label": "اظهار الوسوم",
-            "description": null,
-            "id": "show_tags",
-            "format": "switch",
-            "required": false,
-            "value": true,
-            "selected": true
-        },
-        {
-            "id": "background-color-picker",
-            "type": "string",
-            "format": "color",
-            "inputType": "color",
-            "label": "لون خلفية الموقع",
-            "description": "قم بادخال اللون الذي تريده ك خلفية للموقع",
-            "labelHTML": null,
-            "icon": "sicon-format-fill",
-            "value": "#ffffff",
-            "required": false
-        },
-        {
-            "id": "image_background",
-            "type": "string",
-            "format": "image",
-            "label": "خلفية الموقع",
-            "description": "قم برفع الصورة هنا",
-            "labelHTML": null,
-            "placeholder": "e.g. https://hostname.com/image.png",
-            "icon": "sicon-image",
-            "value": null,
-            "required": false
-        }
-    ],
+    "settings": [],
     "components": [
         {
             "key": "186b3f4f-25cf-4d3c-abca-cef7eed6f0ab",
@@ -128,36 +96,10 @@
         },
         {
             "key": "2b1b130b-5b37-422a-9683-e0fd367460c0",
-            "title": "روابط سريعة",
+            "title": "روابط سريعة (مخصصة)",
             "icon": "sicon-layout-grid-rearrange",
             "path": "home.main-links",
             "fields": [
-                {
-                    "type": "static",
-                    "format": "description",
-                    "id": "with-bg",
-                    "value": "<div style='padding-top:10px;margin-bottom:30px;border:1px solid #ebebeb;border-radius:5px;text-align:center;overflow:hidden'><h6 style='margin-bottom:10px'>معاينة العنصر</h6><img src='https://cdn.salla.network/images/themes/raed/main-links-with-bg.jpg?v=1.1'></div>",
-                    "conditions": [
-                        {
-                            "id": "merge_with_top_component",
-                            "operation": "=",
-                            "value": true
-                        }
-                    ]
-                },
-                {
-                    "type": "static",
-                    "format": "description",
-                    "id": "without-bg",
-                    "value": "<div style='padding-top:10px;margin-bottom:30px;border:1px solid #ebebeb;border-radius:5px;text-align:center;overflow:hidden'><h6 style='margin-bottom:10px'>معاينة العنصر</h6><img src='https://cdn.salla.network/images/themes/raed/main-links.png?v=1.1'></div>",
-                    "conditions": [
-                        {
-                            "id": "merge_with_top_component",
-                            "operation": "=",
-                            "value": false
-                        }
-                    ]
-                },
                 {
                     "type": "string",
                     "icon": "sicon-format-text-alt",
@@ -171,34 +113,6 @@
                     "placeholder": "أدخل العنوان هنا...",
                     "minLength": 0,
                     "maxLength": 100
-                },
-                {
-                    "type": "boolean",
-                    "icon": "sicon-toggle-off",
-                    "label": "دمج مع العنصر السابق",
-                    "description": null,
-                    "id": "merge_with_top_component",
-                    "format": "switch",
-                    "required": false,
-                    "value": false,
-                    "selected": false
-                },
-                {
-                    "type": "static",
-                    "format": "description",
-                    "id": "static-desc",
-                    "value": "<small style='margin: -36px 0 30px;display: block;'>* إزاحة كامل العنصر ومحتوياته مع العنصر السابق، وجعلهما يظهران كعنصر واحد متناسق، يكون ذا فائدة في حالة كان العنصر السابق هو (صور متحركة محسنة). </small>"
-                },
-                {
-                    "type": "boolean",
-                    "icon": "sicon-toggle-off",
-                    "label": "عرض أسهم التحرك",
-                    "description": "",
-                    "id": "show_controls",
-                    "format": "switch",
-                    "required": false,
-                    "value": true,
-                    "selected": true
                 },
                 {
                     "type": "boolean",
@@ -230,7 +144,8 @@
                             "operation": "=",
                             "value": true
                         }
-                    ]
+                    ],
+                    "value": []
                 },
                 {
                     "id": "links",
@@ -239,7 +154,7 @@
                     "required": true,
                     "minLength": 3,
                     "maxLength": 100,
-                    "item_label": "رابط ",
+                    "item_label": "رابط",
                     "value": [
                         {
                             "links.icon": "sicon-store2",
@@ -258,17 +173,6 @@
                         {
                             "type": "string",
                             "icon": "sicon-format-text-alt",
-                            "label": "عنوان الرابط",
-                            "id": "links.icon",
-                            "value": "sicon-store2",
-                            "required": false,
-                            "format": "icon",
-                            "class": "form--inline",
-                            "description": null
-                        },
-                        {
-                            "type": "string",
-                            "icon": "sicon-format-text-alt",
                             "multilanguage": true,
                             "id": "links.title",
                             "value": null,
@@ -284,7 +188,7 @@
                             "icon": "sicon-link",
                             "label": "الرابط",
                             "id": "links.url",
-                            "value": null,
+                            "value": [],
                             "description": null,
                             "required": false,
                             "format": "variable-list",
@@ -342,6 +246,30 @@
                                     "value": "custom"
                                 }
                             ]
+                        },
+                        {
+                            "id": "links.link_img_before",
+                            "type": "string",
+                            "format": "image",
+                            "label": "صورة قبل التمرير",
+                            "description": null,
+                            "labelHTML": null,
+                            "placeholder": "e.g. https://hostname.com/image.png",
+                            "icon": "sicon-image",
+                            "value": null,
+                            "required": false
+                        },
+                        {
+                            "id": "links.link_img_after",
+                            "type": "string",
+                            "format": "image",
+                            "label": "صورة بعد التمرير",
+                            "description": null,
+                            "labelHTML": null,
+                            "placeholder": "e.g. https://hostname.com/image.png",
+                            "icon": "sicon-image",
+                            "value": null,
+                            "required": false
                         }
                     ],
                     "conditions": [
@@ -355,112 +283,180 @@
             ]
         },
         {
-            "key": "eb97ad58-c191-4a42-958d-23db2ca4388b",
-            "title": "about us",
-            "icon": "sicon-store",
-            "path": "home.aboutus",
+            "key": "2cdc8453-b24e-4fc9-bbad-e011664aa710",
+            "title": "خلفية متحركة مع كتابة",
+            "icon": "sicon-arrow-swap",
+            "path": "home.background-slide-and-title-hero-section",
             "fields": [
                 {
-                    "id": "aboutus_title",
+                    "id": "bg_slider_collection",
+                    "type": "collection",
+                    "format": "collection",
+                    "label": "الصور",
+                    "description": null,
+                    "labelHTML": null,
+                    "item_label": null,
+                    "icon": "sicon-list-add",
+                    "fields": [
+                        {
+                            "id": "bg_slider_collection.bg_slider_title",
+                            "type": "string",
+                            "format": "text",
+                            "label": "العنوان",
+                            "description": null,
+                            "labelHTML": null,
+                            "placeholder": "Placeholder text ..",
+                            "icon": "sicon-format-text-alt",
+                            "value": "مجوهرات ماس",
+                            "multilanguage": false,
+                            "required": false,
+                            "minLength": "1",
+                            "maxLength": "45"
+                        },
+                        {
+                            "id": "bg_slider_collection.bg_slider_secoundry_paragraph",
+                            "type": "string",
+                            "format": "text",
+                            "label": "النص الاضافي",
+                            "description": null,
+                            "labelHTML": null,
+                            "placeholder": "Placeholder text ..",
+                            "icon": "sicon-format-text-alt",
+                            "value": "العراقة والاصالة",
+                            "multilanguage": false,
+                            "required": false,
+                            "minLength": "1",
+                            "maxLength": "45"
+                        },
+                        {
+                            "id": "bg_slider_collection.image",
+                            "type": "string",
+                            "format": "image",
+                            "label": "Image",
+                            "description": null,
+                            "labelHTML": null,
+                            "placeholder": "e.g. https://hostname.com/image.png",
+                            "icon": "sicon-image",
+                            "value": null,
+                            "required": false
+                        }
+                    ],
+                    "value": [],
+                    "minLength": 1,
+                    "maxLength": 5
+                }
+            ]
+        },
+        {
+            "key": "a9b118a9-95eb-4500-8b77-e3b74e717e71",
+            "title": "من نحن",
+            "icon": "sicon-crown",
+            "path": "home.about_us",
+            "fields": [
+                {
+                    "id": "about_us_title",
                     "type": "string",
                     "format": "text",
                     "label": "العنوان",
-                    "description": "اكتب العنوان البديل هنا",
-                    "labelHTML": null,
-                    "placeholder": "Placeholder text ..",
-                    "icon": "sicon-format-text-alt",
-                    "value": "مجوهرات ماس اختيارك الافضل...",
-                    "multilanguage": false,
-                    "required": false,
-                    "minLength": 6,
-                    "maxLength": "45"
-                },
-                {
-                    "id": "aboutus_subtitle_golden",
-                    "type": "string",
-                    "format": "text",
-                    "label": "العنوان الفرعي",
-                    "description": "سوف يظهر ما تكتبه هنا باللون الذهبي...",
-                    "labelHTML": null,
-                    "placeholder": "Placeholder text ..",
-                    "icon": "sicon-format-text-alt",
-                    "value": "اختيارك الافضل..",
-                    "multilanguage": false,
-                    "required": false,
-                    "minLength": 6,
-                    "maxLength": 30
-                },
-                {
-                    "id": "aboutus_paragraph",
-                    "type": "string",
-                    "format": "text",
-                    "label": "النص الثانوي",
                     "description": null,
                     "labelHTML": null,
                     "placeholder": "Placeholder text ..",
                     "icon": "sicon-format-text-alt",
-                    "value": "مجوهرات ماس مجوهرات ماس مجوهرات ماس مجوهرات ماس مجوهرات ماس مجوهرات ماس مجوهرات ماس مجوهرات ماس مجوهرات ماس مجوهرات ماس مجوهرات ماس مجوهرات ماس مجوهرا",
+                    "value": "مجوهرات ماس اختيار الافضل",
                     "multilanguage": false,
                     "required": false,
                     "minLength": 6,
                     "maxLength": "150"
                 },
                 {
-                    "id": "video_url_aboutus_new",
+                    "id": "about_us_paragraph",
+                    "type": "string",
+                    "format": "text",
+                    "label": "النص الاضفي",
+                    "description": null,
+                    "labelHTML": null,
+                    "placeholder": "Placeholder text ..",
+                    "icon": "sicon-format-text-alt",
+                    "value": "مجموهرات ماس تجيسد للجمال الازلي والاناقة الفريدة, كل قطعة مصممة بحرفية  فائقة, تحمل طابع الفخامة والاناقة, مختصون بقطع الالماس والذهب الفريدة منذ عام 1403 هجري",
+                    "multilanguage": false,
+                    "required": false,
+                    "minLength": 6,
+                    "maxLength": "450"
+                },
+                {
+                    "id": "about_us_video_url",
                     "type": "string",
                     "format": "url",
                     "inputType": "url",
-                    "label": "رابط الفيديو",
+                    "label": "رابط الفيديو الجانبي",
                     "description": null,
                     "labelHTML": null,
                     "placeholder": "e.g. https://salla.sa",
                     "icon": "sicon-link",
-                    "value": "https://www.apple.com/105/media/us/apple-vision-pro/2024/6e1432b2-fe09-4113-a1af-f20987bcfeee/anim/experience-productivity/large.mp4",
+                    "value": "https://ny.cptart.co/MAS.mp4",
                     "required": false,
                     "minLength": 6,
                     "maxLength": "1000"
                 },
                 {
-                    "id": "aboutus_url_for_page",
+                    "id": "about_us_url_destination",
                     "type": "string",
                     "format": "url",
                     "inputType": "url",
-                    "label": "رابط صفخة \"من نحن\"",
-                    "description": "قم بوضع رابط الصفحة التي تريد الذهاب اليها هنا",
+                    "label": "رابط الصفحة الهدف (من نحن)",
+                    "description": null,
                     "labelHTML": null,
                     "placeholder": "e.g. https://salla.sa",
                     "icon": "sicon-link",
-                    "value": null,
+                    "value": "#",
                     "required": false,
-                    "minLength": "500",
+                    "minLength": 6,
                     "maxLength": "1000"
+                },
+                {
+                    "id": "aout_us_bottun_text",
+                    "type": "string",
+                    "format": "text",
+                    "label": "محتوى الزر",
+                    "description": "قم بكتابة ما تريد ان يظهر في الزر",
+                    "labelHTML": null,
+                    "placeholder": "Placeholder text ..",
+                    "icon": "sicon-format-text-alt",
+                    "value": "من نحن",
+                    "multilanguage": false,
+                    "required": false,
+                    "minLength": 6,
+                    "maxLength": "45"
                 }
             ]
         },
         {
-            "key": "f9ed6c74-f5b9-431d-9ffb-43100bd57e1c",
-            "title": "بانر  عريض لعرض انواع التصنيفات",
-            "icon": "sicon-arrow-expand",
-            "path": "home.enhanced-fixed-banner",
+            "key": "b73bc2b3-cbbb-4eea-83a1-accc6433316a",
+            "title": "بانر لعرض التصنيفات ضمن المتجر",
+            "icon": "sicon-center",
+            "path": "home.custome_banner",
             "fields": [
                 {
-                    "id": "background_image_for_enhnaced_fixed_banner",
-                    "type": "string",
-                    "format": "image",
-                    "label": "صورة الخلفية",
-                    "description": "قم بوضع الصورة التي سوف تظهر التصنيفات فوقها",
-                    "labelHTML": null,
-                    "placeholder": "e.g. https://hostname.com/image.png",
-                    "icon": "sicon-image",
-                    "value": "الصورة التي سوف تظهر في الخلفية",
-                    "required": true
-                },
-                {
-                    "id": "parent_cat_for_enhanced_fixed_banner",
+                    "id": "section_title",
                     "type": "string",
                     "format": "text",
-                    "label": "نوع التصنيف العام الذي تريده",
-                    "description": "قم بوضع اسم التصنيف الاب الذي تريد ان تظهر تفريعاته اسفله",
+                    "label": "عنوان الفقرة كاملة",
+                    "description": null,
+                    "labelHTML": null,
+                    "placeholder": "Placeholder text ..",
+                    "icon": "sicon-format-text-alt",
+                    "value": "منتجاتنا",
+                    "multilanguage": false,
+                    "required": true,
+                    "minLength": "1",
+                    "maxLength": 30
+                },
+                {
+                    "id": "banner_title",
+                    "type": "string",
+                    "format": "text",
+                    "label": "العنوان ضمن البانر",
+                    "description": null,
                     "labelHTML": null,
                     "placeholder": "Placeholder text ..",
                     "icon": "sicon-format-text-alt",
@@ -471,10 +467,22 @@
                     "maxLength": 30
                 },
                 {
-                    "id": "cat_collection_for_enhanced_fixed_banner",
+                    "id": "banner_background",
+                    "type": "string",
+                    "format": "image",
+                    "label": "خلفية البانر",
+                    "description": null,
+                    "labelHTML": null,
+                    "placeholder": "e.g. https://hostname.com/image.png",
+                    "icon": "sicon-image",
+                    "value": null,
+                    "required": true
+                },
+                {
+                    "id": "banner_cat_selection",
                     "type": "items",
                     "format": "dropdown-list",
-                    "label": "حدد التصنيفات الفرعية التي سوف تظهر عند تمرير المؤشر",
+                    "label": "اختار الفئات التي تريد عرضها",
                     "description": null,
                     "labelHTML": null,
                     "icon": "sicon-keyboard_arrow_down",
@@ -483,10 +491,17 @@
                     "source": "Categories",
                     "multichoice": true,
                     "searchable": true,
-                    "required": false,
+                    "required": true,
                     "value": []
                 }
             ]
+        },
+        {
+            "key": "0443579f-5acf-48c7-b4e6-57741da70747",
+            "title": "تصفح حسب التصنيف",
+            "icon": "sicon-caret-down-circle",
+            "path": "home.brows_by_cat",
+            "fields": []
         }
     ],
     "support_url": "https://cptart.co",

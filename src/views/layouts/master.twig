@@ -50,117 +50,91 @@
 | theme.settings.get(settingName, default=null)      | mixed    | get theme setting ex `theme.settings.get('my_var', 'fallback')`                                          |
 #}
 <!DOCTYPE html>
-<html lang="{{ user.language.code }}" dir="{{ user.language.dir }}">
+<html
+	lang="{{ user.language.code }}" dir="{{ user.language.dir }}">
+	<!-- بسم الله الرحمن الرحيم -->
 	<head>
 		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta
-		http-equiv="X-UA-Compatible" content="IE=edge">
-		 <script type="text/javascript" src="{{ asset ('js/partials/my-product-card.js') }}"></script>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		{{ theme.settings.set('placeholder', 'images/placeholder.png') }}
+		name="viewport" content="width=device-width, initial-scale=1">
+		 <script type="text/javascript" src="{{ asset('my-product-card.js') }}"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-		<link
-		href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		 <script src="https://unpkg.com/heroicons@1.0.6/umd/heroicons.min.js"></script>
 
-
-		<style>
-			body {
-				background-image: url('{{ 'images/1.svg' | asset }}');
-				background-size: cover;
-				background-repeat: repeat-y;
-				background-position: center;
-			}
-			.nickless-background {
-				background-image: url('{{ 'images/Untitled-4.png' | asset }}');
-				background-position: left center;
-				background-repeat: no-repeat;
-				background-size: 40% 100%;
-			}
-			.new-background {
-				background-image: url('{{ 'images/2.svg' | asset }}') !important;
-				background-position: center !important;
-				background-repeat: no-repeat !important;
-				background-size: cover !important;
-			}
-			.neck-background-svg {
-				background-image: url('{{ 'icons/' | asset }}') !important;
-				background-position: center !important;
-				background-repeat: no-repeat !important;
-				background-size: cover !important;
-			}
-
-			footer {
-				position: relative; /* يتيح وضع العنصر الخلفي بشكل صحيح */
-				background-color: #f0f0f0; /* لون الخلفية للفوتر */
-				overflow: hidden;
-			}
-
-			.footer-background {
-				position: absolute; /* جعل الخلفية تسبح فوق الفوتر */
-				left: 0; /* وضع الخلفية على اليسار */
-				top: 0; /* تبدأ من أعلى الفوتر */
-				background-color: #f0f0f0; /* نفس لون الخلفية للفوتر */
-				background-image: url('{{ 'images/9.svg' | asset }}');
-				background-position: left center;
-				background-repeat: no-repeat;
-				background-size: contain; /* لتغطية كامل المنطقة المحددة */
-				z-index: 1; /* تأكيد أن الخلفية تظهر فوق الفوتر */
-			}
-		</style>
+		{{ theme.settings.set('placeholder', 'images/placeholder.png') }}
 
 		<!-- To eliminate all render blocking CSS & JS and start with the critical css-->
 		<!-- To show loader to the user till the page content are  loaded-->
-		<style>
-			.loader-init {
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100vw;
-				height: 100vh;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				background: white;
-				transition: opacity 0.75s, visibility 0.75s;
-				z-index: 9999;
-			}
+			<style>
+body {
+	background-image: url('{{ 'images/1.svg' | asset }}');
+	background-size: cover;
+	background-repeat: repeat-y;
+	background-position: center;
+}
+footer {
+	position: absolute; /* جعل الخلفية تسبح فوق الفوتر */
+	left: 0; /* وضع الخلفية على اليسار */
+	top: 0; /* تبدأ من أعلى الفوتر */
+	background-color: #f0f0f0; /* نفس لون الخلفية للفوتر */
+	background-image: url('{{ 'images/9.svg' | asset }}');
+	background-position: left center;
+	background-repeat: no-repeat;
+	background-size: contain; /* لتغطية كامل المنطقة المحددة */
+	z-index: 1; /* تأكيد أن الخلفية تظهر فوق الفوتر */
+}
+.loader-init {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: white;
+	transition: opacity 0.75s, visibility 0.75s;
+	z-index: 9999;
+}
 
-			.loader-init--hidden {
-				opacity: 0;
-				visibility: hidden;
-			}
+.loader-init--hidden {
+	opacity: 0;
+	visibility: hidden;
+}
 
-			.loader-init::after {
-				content: "";
-				width: 36px;
-				height: 36px;
-				border: 3px solid #eee;
-				border-top-color: #5bd5c4;
-				border-radius: 50%;
-				animation: loading 0.75s ease infinite;
-			}
+.loader-init::after {
+	content: "";
+	width: 36px;
+	height: 36px;
+	border: 3px solid #eee;
+	border-top-color: #5bd5c4;
+	border-radius: 50%;
+	animation: loading 0.75s ease infinite;
+}
 
-			@keyframes loading {
-				from {
-					transform: rotate(0turn);
-				}
-				to {
-					transform: rotate(1turn);
-				}
-			}
+@keyframes loading {
+	from {
+		transform: rotate(0turn);
+	}
+	to {
+		transform: rotate(1turn);
+	}
+}
+@font-face {
+	font-family: 'etab';
+	src: url({{ 'fonts/etab.TTF' | asset }}) format("truetype");
+}
 		</style>
-
 		 <script>
-																																																																																																																																																																																					window.addEventListener("load", () => {
-																																																																																																																																																																																					const loader = document.querySelector(".loader-init");
-																																																																																																																																																																																					loader.classList.add("loader-init--hidden");
-																																																																																																																																																																																					loader.addEventListener("transitionend", () => {
-																																																																																																																																																																																					if (!document.querySelector(".loader-init")) return;
-																																																																																																																																																																																					document.body.removeChild(loader);
-																																																																																																																																																																																					});
-																																																																																																																																																																																					});
-																																																																																																																																																																																					</script>
+																																												      window.addEventListener("load", () => {
+																																												        const loader = document.querySelector(".loader-init");
+																																												        loader.classList.add("loader-init--hidden");
+																																												        loader.addEventListener("transitionend", () => {
+																																														  if (!document.querySelector(".loader-init")) return;
+																																												          document.body.removeChild(loader);
+																																												          });
+																																												      });
+																																												    </script>
 
 		 <script defer data-cfasync="false" src="{{ 'product-card.js'|asset }}"></script>
 		 <script defer src="{{ 'main-menu.js'|asset }}"></script>{% block head_scripts %}
@@ -168,16 +142,15 @@
 
 
 		 <script data-cfasync="false">
-																																																																																																																																																																																																																																																																																																		        window.header_is_sticky = "{{theme.settings.get('header_is_sticky', 'Default Value')}}"
-																																																																																																																																																																																																																																																																																																		        window.imageZoom = "{{theme.settings.get('imageZoom')}}"
-																																																																																																																																																																																																																																																																																																		    </script>
+																																												        window.header_is_sticky = "{{theme.settings.get('header_is_sticky', 'Default Value')}}"
+																																												        window.imageZoom = "{{theme.settings.get('imageZoom')}}"
+																																												    </script>
 
 		{% hook 'head:start' %}
 		{% hook head %}{% block styles %}
 		{% endblock %}
 		<link rel="stylesheet" href="{{ 'app.css' | asset }}"> <link rel="stylesheet" href="{{ theme.font.path|cdn }}"/>
 		<link rel="stylesheet" href="{{ 'fonts/sallaicons.css'|cdn }}"/>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMUxeP7PR3eWx2BDAzF1Stt7Tme6WRWlPZlTw4F" crossorigin="anonymous">
 
 		<style>:root
 		{
@@ -193,20 +166,13 @@
 		}
 	</style>
 	{# tracking services, custom css feature. #}
-	<style>
-		@font-face {
-			font-family: 'etab';
-			src: url({{ 'fonts/etab.TTF' | asset }}) format("truetype");
-		}
-	</style>
 	{% hook 'head:end' %}
-
 </head>
-<body id="app" class=" back overflow-x-hidden font-etab {% hook 'body:classes' %}
-																																																																																																																																																																					{{ theme.settings.get('footer_is_dark') ? ' footer-is-dark' : ' footer-is-light' }}
-																																																																																																																																																																					{{ theme.settings.get('topnav_is_dark') ? ' topnav-is-dark' : '' }}
-																																																																																																																																																																					{{ theme.settings.get('sticky_add_to_cart') ? ' is-sticky-product-bar' : '' }}
-																																																																																																																																																																					">
+<body id="app" class="overflow-x-hidden font-etab {% hook 'body:classes' %}
+																																												  {{ theme.settings.get('footer_is_dark') ? ' footer-is-dark' : ' footer-is-light' }}
+																																												  {{ theme.settings.get('topnav_is_dark') ? ' topnav-is-dark' : '' }}
+																																												  {{ theme.settings.get('sticky_add_to_cart') ? ' is-sticky-product-bar' : '' }}
+																																												  ">
 	<div class="loader-init"></div>
 	<noscript>
 		To get full functionality of this site you need to enable JavaScript. Here is how
@@ -215,9 +181,7 @@
 	<div class="app-inner flex flex-col min-h-full">
 		{% hook 'body:start' %}
 		{% component 'header.header' %}
-		{% block content %}
-			<salla-social class="custom-color"></salla-social>
-		{% endblock %}
+		{% block content %}{% endblock %}
 		{% component 'footer.footer' %}
 	</div>
 	{% hook 'body:end' %} <script defer src="{{ 'app.js' | asset }}"></script>

@@ -57,6 +57,7 @@
 | order.items[].rating.content     | string                            | *HTML                                                                                    |
 | order.items[].rating.is_pending  | bool                              |                                                                                          |
 | order.items[].rating.stars       | int                               |                                                                                          |
+| order.items[].rating.images      | array                             |                                                                                          |
 | order.items[].rating.created_at  | date                              |                                                                                          |
 | order.discounts                  | array                             |                                                                                          |
 | order.discounts[].name           | string                            |                                                                                          |
@@ -334,14 +335,15 @@
                                 <div class="flow-root rounded-md px-4 border border-gray-200">
                                     <dl class="text-sm text-dark divide-y divide-border-color">
                                         {% for file in item.files %}
-                                            <div class="py-2.5 center-between">
+                                            {% set is_protected = "/download" in file.url ? false : true %}
+                                            <div class="order-file py-2.5 center-between">
                                                 <dt class="mb-2 md:mb-0">
                                                     {{ file.name }}
                                                 </dt>
                                                 <dd class="font-medium text-xs">
                                                     <salla-button href="{{ file.url }}" target="_blank"
                                                        class="btn--rounded-full font-bold text-gray-600 hover:text-black">
-                                                        <i class="sicon-download"></i> {{ trans('pages.thank_you.download') }}
+                                                        <i class="sicon-{{is_protected ? 'eye' : 'download'}}"></i> {{ is_protected ? trans('common.uploader.browse') : trans('pages.thank_you.download') }}
                                                     </salla-button>
                                                 </dd>
                                             </div>
@@ -407,7 +409,14 @@
                                     {% if item.rating.is_pending %}
                                         <span>{{ trans('pages.rating.pending') }}</span>
                                     {% endif %}
-                                    <salla-rating-stars size="small" value="{{item.rating.stars}}"></salla-rating-stars>
+                                    <salla-rating-stars with-label size="small" value="{{item.rating.stars}}"></salla-rating-stars>
+                                    {% if item.rating.images|length %}
+                                        <div class="flex items-center gap-2 mt-2">
+                                            {% for image in item.rating.images %}
+                                                <img class="w-20 h-20 object-cover rounded-md" src="{{image}}"/>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
                                 </section>
                             {% endif %}
                         </div>
@@ -593,7 +602,7 @@
             <section class="bg-white p-5 rounded-md">
                 <h2 class="text-lg font-bold mb-5">{{ trans('pages.rating.rate_the_store') }}</h2>
                 <p class="mb-2">{{ order.rating.store.content|raw }}</p>
-                <salla-rating-stars value="{{order.rating.store.stars}}"></salla-rating-stars>
+                <salla-rating-stars with-label value="{{order.rating.store.stars}}"></salla-rating-stars>
             </section>
         {% endif %}
 
@@ -602,7 +611,7 @@
             <section class="bg-white p-5 rounded-md">
                 <h2 class="text-lg font-bold mb-5">{{ trans('pages.rating.rate_shipping') }}</h2>
                 <p class="mb-2">{{ order.rating.shipping.content|raw }}</p>
-                <salla-rating-stars value="{{order.rating.shipping.stars}}"></salla-rating-stars>
+                <salla-rating-stars with-label value="{{order.rating.shipping.stars}}"></salla-rating-stars>
             </section>
         {% endif %}
 

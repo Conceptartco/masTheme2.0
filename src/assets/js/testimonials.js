@@ -19,4 +19,4 @@ class Testimonials extends BasePage {
     }
 }
 
-Testimonials.initiateWhenReady(['testimonials-enhanced']);
+Testimonials.initiateWhenReady(['testimonials']);
