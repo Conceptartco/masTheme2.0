@@ -507,7 +507,7 @@
             "key": "6adabc38-8ef7-4c23-bfca-f97067c7b0f0",
             "title": "اراء العملاء (محسنة)",
             "icon": "sicon-paper-plane-o",
-            "path": "homw.testimonials-enhanced",
+            "path": "home.testimonials-enhanced",
             "fields": [
                 {
                     "id": "testi_slides_title",
