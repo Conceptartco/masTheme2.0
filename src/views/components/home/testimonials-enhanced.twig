@@ -3,8 +3,8 @@
 </h1>
 
 <section class="bg-[#f0f0f0] relative" style="height: 40vh; width: 50vw;">
-    <div class="mx-auto h-full w-full flex justify-center items-center">
-        <salla-slider id="main-slider-{{ position }}" class="w-full h-full" auto-play show-controls="false" pagination>
+    <div class="h-full w-full flex justify-center items-center">
+        <salla-slider id="main-slider-{{ position }}" class="w-full h-full flex justify-center items-center" auto-play show-controls="false" pagination>
             <div slot="items" class="h-full">
                 {% for slide in component.testi_slides_collection %}
                     <div class="swiper-slide w-full h-full flex items-center justify-center">
@@ -16,6 +16,6 @@
     </div>
     
     {% if component.testi_slides_bg %}
-        <img src="{{ component.testi_slides_bg }}" alt="Bottom Right Image" class="hidden lg:block lg:absolute lg:bottom-0 lg:right-0" style="width: 25%; height: auto;">
+        <img src="{{ component.testi_slides_bg }}" alt="Bottom Right Image" class="hidden lg:block lg:absolute" style="width: 25%; height: auto; bottom: 0; right: 0;">
     {% endif %}
 </section>
