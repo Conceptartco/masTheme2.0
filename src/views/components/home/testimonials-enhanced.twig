@@ -1,21 +1,23 @@
-<h1 class="text-center font-slim md:text-4xl lg:text-5xl">
-    {{ component.testi_slides_title }}
-</h1>
+<div class="container mx-auto" style="height: 40vh; width: 50vw; position: relative;">
+    <h1 class="text-center font-slim md:text-4xl lg:text-5xl mb-4">
+        {{ component.testi_slides_title }}
+    </h1>
 
-<section class="bg-[#f0f0f0] relative" style="height: 40vh; width: 50vw; position: relative;">
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full flex justify-center items-center">
-        <salla-slider id="main-slider-{{ position }}" class="w-full h-full" auto-play show-controls="false" pagination>
-            <div slot="items" class="h-full">
-                {% for slide in component.testi_slides_collection %}
-                    <div class="swiper-slide w-full h-full flex items-center justify-center">
-                        <img src="{{ slide.testi_slides_img }}" alt="Testimonial Image" class="max-w-[50%] max-h-full object-contain mx-auto">
-                    </div>
-                {% endfor %}
-            </div>
-        </salla-slider>
+    <div class="relative h-full w-full bg-[#f0f0f0]">
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full flex justify-center items-center">
+            <salla-slider id="main-slider-{{ position }}" class="w-full h-full" auto-play show-controls="false" pagination>
+                <div slot="items" class="h-full">
+                    {% for slide in component.testi_slides_collection %}
+                        <div class="swiper-slide w-full h-full flex items-center justify-center">
+                            <img src="{{ slide.testi_slides_img }}" alt="Testimonial Image" class="max-w-[50%] max-h-full object-contain mx-auto">
+                        </div>
+                    {% endfor %}
+                </div>
+            </salla-slider>
+        </div>
+
+        {% if component.testi_slides_bg %}
+            <img src="{{ component.testi_slides_bg }}" alt="Bottom Right Image" class="hidden lg:block lg:absolute" style="width: 25%; height: auto; bottom: 0; right: 0;">
+        {% endif %}
     </div>
-
-    {% if component.testi_slides_bg %}
-        <img src="{{ component.testi_slides_bg }}" alt="Bottom Right Image" class="hidden lg:block lg:absolute" style="width: 25%; height: auto; bottom: 0; right: 0;">
-    {% endif %}
-</section>
+</div>
