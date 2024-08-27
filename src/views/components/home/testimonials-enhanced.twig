@@ -1,5 +1,5 @@
-<div class="container mx-auto mb-10" style="height: 40vh; width: 50vw; position: relative;">
-    <h1 class="text-center font-slim md:text-4xl lg:text-5xl mb-4">
+<div class="container mx-auto mb-10 h-[40vh] w-[50vw] md:h-[60vh] md:w-[80vw] lg:h-[40vh] lg:w-[50vw] relative">
+    <h1 class="text-center font-slim text-2xl md:text-4xl lg:text-5xl mb-4">
         {{ component.testi_slides_title }}
     </h1>
 
@@ -9,7 +9,7 @@
                 <div slot="items" class="h-full">
                     {% for slide in component.testi_slides_collection %}
                         <div class="swiper-slide w-full h-full flex items-center justify-center">
-                            <img src="{{ slide.testi_slides_img }}" alt="Testimonial Image" class="max-w-[50%] max-h-full object-contain mx-auto">
+                            <img src="{{ slide.testi_slides_img }}" alt="Testimonial Image" class="max-w-[90%] max-h-full object-contain mx-auto">
                         </div>
                     {% endfor %}
                 </div>
@@ -17,7 +17,7 @@
         </div>
 
         {% if component.testi_slides_bg %}
-            <img src="{{ component.testi_slides_bg }}" alt="Side Image" class="hidden lg:block lg:absolute" style="width: 25%; height: auto; bottom: -25%; right: -25%;">
+            <img src="{{ component.testi_slides_bg }}" alt="Side Image" class="hidden lg:block lg:absolute lg:w-[25%] lg:h-auto lg:bottom-[-25%] lg:right-[-25%]">
         {% endif %}
     </div>
 </div>
