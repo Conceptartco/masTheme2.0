@@ -1,16 +1,4 @@
 
-{#
-| Variable                           | Type     | Description                                                                  |
-|------------------------------------|----------|------------------------------------------------------------------------------|
-| component                          | object   | Contains merchant settings for fields from twilight.json `component` section |
-| component.merge_with_top_component | bool     |                                                                              |
-| component.title                    | ?string  |                                                                              |
-| component.links                    | object[] | list of links                                                                |
-| component.links[].icon             | string   |                                                                              |
-| component.links[].title            | string   |                                                                              |
-| component.links[].url              | string   |                                                                              |
-| position                           | int      | Sorting number start from zero                                               |
-#}
 <section >
 	<h1 >{{ component.title }}</h1>
 	{% for link in component.links %}
