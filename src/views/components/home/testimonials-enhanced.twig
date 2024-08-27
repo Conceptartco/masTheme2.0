@@ -1,9 +1,8 @@
-<div class="container mx-auto mb-10 sm:w-[90vw] lg:w-[50vw]" style=" position: relative;">
+<div class="container mx-auto mb-5 relative" style="background-image: url('{{ component.testi_slides_bg }}'); background-position: right bottom; background-size: 100px; background-repeat: no-repeat;">
     <h1 class="text-center font-slim md:text-4xl lg:text-5xl mb-4">
         {{ component.testi_slides_title }}
     </h1>
-
-    <div class="relative bg-[#f0f0f0] flex justify-center items-center">
+    <div class="relative bg-[#f0f0f0] flex justify-center items-center lg:w-1/2 w-full lg:h-[40vh] h-auto mx-auto">
         <salla-slider id="main-slider-{{ position }}" class="w-full h-full" auto-play show-controls="false" pagination>
             <div slot="items" class="h-full">
                 {% for slide in component.testi_slides_collection %}
