@@ -1,15 +1,16 @@
-
-<section >
-	<h1 >{{ component.title }}</h1>
-	{% for link in component.links %}
-		{% if link.title %}
-		<div >
-		<h2>{{ link.title }}</h2>
-			<a href="{{ link.url }}" >
-				{# img before and after hover will transfare to be img aafter #}
-			</a>
-		</div>
-		{% endif %}
-	{% endfor %}
+<section class="p-6 bg-gray-100">
+    <h1 class="text-center text-3xl font-bold mb-6">{{ component.title }}</h1>
+    <div class="flex flex-wrap justify-center gap-6">
+        {% for link in component.links %}
+            {% if link.title %}
+            <div class="relative w-48 h-40 text-center">
+                <h2 class="text-xl font-medium mb-2">{{ link.title }}</h2>
+                <a href="{{ link.url }}" class="block relative w-full h-full">
+                    <img src="{{ link.link_img_before }}" alt="{{ link.title }}" class="w-full h-full object-contain transition-opacity duration-300 ease-in-out hover:opacity-0 absolute inset-0">
+                    <img src="{{ link.link_img_after }}" alt="{{ link.title }}" class="w-full h-full object-contain absolute inset-0 opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100">
+                </a>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 </section>
-
