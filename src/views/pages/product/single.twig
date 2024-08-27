@@ -137,14 +137,20 @@
 					{% include 'pages.partials.product.options' %}
 
 					<!-- Display Product Price -->
-					<div class="text-2xl font-bold mt-4">
-						{% if product.is_on_sale %}
-							<span class="text-red-500">{{ product.sale_price }} {{ product.currency }}</span>
-							<span class="line-through text-gray-500">{{ product.regular_price }} {{ product.currency }}</span>
-						{% else %}
-							<span>{{ product.price }}</span>
-						{% endif %}
-					</div>
+					{% if product.is_on_sale %}
+    <div class="product-price">
+        <h4>{{ product.sale_price|money }}</h4>
+        <span class="regular-price">{{ product.regular_price|money }}</span>
+    </div>
+    <div class="discount-ends">
+        <span>{{ trans('pages.products.discount_ends') }}: {{ product.discount_ends }}</span>
+    </div>
+{% else %}
+    <div class="product-price">
+        <h4>{{ product.price|money }}</h4>
+    </div>
+{% endif %}
+
 
 					{% hook 'product:single.form.end' %}
 
