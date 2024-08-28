@@ -59,25 +59,39 @@
                 {% hook 'product:single.form.start' %}
                 {% include 'pages.partials.product.options' %}
                 {% hook 'product:single.form.end' %}
-                <div class="center-between w-full">
-                    <label class="form-label">
-                        <b class="block">{{ trans('pages.products.price') }}</b>
-                    </label>
-                    <div class="flex whitespace-nowrap price-wrapper gap-4 items-center">
-                        <!-- Sale Price -->
-                        <div class="{{ product.is_on_sale ? '' : 'hidden' }} price_is_on_sale space-x-2 rtl:space-x-reverse whitespace-nowrap">
-                            <h2 class="total-price text-red-800 font-bold text-xl inline-block">
-                                {{ product.sale_price | money }}
-                            </h2>
-                            <span class="before-price text-gray-500 line-through">
-                                {{ product.regular_price | money }}
-                            </span>
+                
+                <section class="flex bg-white p-5 sm:pb-0 rounded-md rounded-b-none">
+                    <div class="center-between w-full">
+                        <label class="form-label">
+                            <b class="block">{{ trans('pages.products.price') }}</b>
+                        </label>
+                        <div class="flex whitespace-nowrap price-wrapper gap-4 items-center">
+                            <!-- Sale Price -->
+                            <div class="{{ product.is_on_sale ? '' : 'hidden' }} price_is_on_sale space-x-2 rtl:space-x-reverse whitespace-nowrap">
+                                <h2 class="total-price text-red-800 font-bold text-xl inline-block">
+                                    {{ product.sale_price | money }}
+                                </h2>
+                                <span class="before-price text-gray-500 line-through">
+                                    {{ product.regular_price | money }}
+                                </span>
+                            </div>
+                            <!-- Starting or Normal Price -->
+                            <div class="starting-or-normal-price gap-4 {{ product.is_on_sale ? 'hidden' : 'flex' }}">
+                                {% if product.starting_price %}
+                                    <span class="starting-price-title">
+                                        {{ trans('pages.products.starting_price') }}
+                                    </span>
+                                {% endif %}
+                                <h2 class="total-price font-bold text-xl inline-block">
+                                    {{ product.starting_price ? product.starting_price | money : product.price | money }}
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="out-of-stock min-h-7 leading-7 hidden text-base text-red-600 !opacity-50 font-bold">
+                            {{ trans('pages.products.out_of_stock') }}
                         </div>
                     </div>
-                    <div class="out-of-stock min-h-7 leading-7 hidden text-base text-red-600 !opacity-50 font-bold">
-                        {{ trans('pages.products.out_of_stock') }}
-                    </div>
-                </div>
+                </section>
             </form>
             
             {% hook 'product:single.description.end' %}
