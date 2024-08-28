@@ -133,27 +133,86 @@
     			{% hook 'product:single.description' %}
 
     			<!-- Product Form -->
-    			<form class="form product-form text-center max-w-[90vw] sm:max-w-[35vw] mx-auto"  onchange="salla.product.getPrice(new FormData(event.currentTarget))" enctype="multipart/form-data" method="post" onsubmit="return salla.form.onSubmit('cart.addItem', event)">
-    				<input type="hidden" name="id" value="{{ product.id }}">
+    			<form enctype="multipart/form-data" method="post"
+      onchange="salla.product.getPrice(new FormData(event.currentTarget))"
+      onsubmit="return salla.form.submit('cart.addItem');">
 
-    				{% hook 'product:single.form.start' %}
+    <input name="id" type="hidden" value="{{ product.id }}"/>
 
-    				
-    				{% include 'pages.partials.product.options' %}
+    {% hook 'product:single.form.start' %}
 
-					{% hook 'product:single.form.end' %}
- 						<h4>{{ product.price|money }}</h4>
-    				<!-- Add to Cart Button -->
-    				<section class="text-center mt-10">
-    					<div class="flex justify-center">
-    						<button class="custom-product-card-add-to-cart-btn" aria-label="Add to wishlist" onclick="salla.wishlist.toggle({{ product.id }})">
-    							أضف الى السلة
-    							<i class="fas fa-shopping-cart mr-2"></i>
-    						</button>
-    					</div>
-    				</section>
-    			</form>
+    {% if product.options|length %}
+        {% for option_index, option in product.options %}
+            {% if option.type in ["splitter"] %}
+                {{ option.element|raw }}
+            {% else %}
+                {% if option.type != "donation" %}
+                    <label for="options[{{ option.id }}]">
+                        <strong>
+                            {{ option.name }}
+                            {% if option.required %}<span>*</span>{% endif %}
+                        </strong>
+                        <small>{{ option.placeholder }}</small>
+                    </label>
+                {% endif %}
+                {{ option.element(product.id)|raw }}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 
+    {% if product.can_add_note or product.can_upload_file %}
+
+        <strong>{{ trans('pages.products.attachments') }}</strong>
+        {% if product.can_add_note %}
+            <button type="button" data-show="note_{{ product.id }}">
+                {{ trans('pages.products.add_note') }}
+            </button>
+        {% endif %}
+
+        {% if product.can_upload_file %}
+            <button type="button" data-show="file_{{ product.id }}"> {{ trans('pages.products.add_file') }} </button>
+        {% endif %}
+
+        {% if product.can_add_note %}
+            <textarea cols="30" name="notes" rows="10"
+                      placeholder="{{ trans('pages.products.notes_placeholder') }}">
+    {{ product.notes }}</textarea>
+        {% endif %}
+
+        {% if product.can_upload_file %}
+            <input name="{{ is_cart?'image_file':'file' }}" type="file"
+                   data-url="{{ link('cart/image') }}" data-instant-upload=""
+                   data-files="{{ product.attachments }}" data-item-id="{{ product.id }}"
+                   data-max-file-size="3MB"/>
+        {% endif %}
+    {% endif %}
+    {% hook 'product:single.form.end' %}
+
+    {# Quantity #}
+    {% if product.is_hidden_quantity %}
+        <input name="quantity" type="hidden" value="1"/>
+    {% else %}
+        {{ trans('pages.products.quantity') }}
+        <salla-quantity-input max="{{ product.max_quantity }}" value="1" name="quantity">
+        </salla-quantity-input>
+    {% endif %}
+
+    {# Price #}
+    {{ trans('pages.products.price') }}
+
+    {% if product.is_on_sale %}
+        <h4>{{ product.sale_price|money }}</h4>
+        {{ product.regular_price|money }}
+    {% else %}
+        <h4>{{ product.price|money }}</h4>
+    {% endif %}
+
+    
+    <salla-add-product-button product-id="{{ product.id }}"
+                              product-status="{{ product.status }}"
+                              product-type="{{ product.type }}">
+    </salla-add-product-button>
+</form>
     			{% hook 'product:single.description.end' %}
 
     		</div>
