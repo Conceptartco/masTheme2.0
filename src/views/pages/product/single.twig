@@ -86,7 +86,7 @@
         
         <!-- Sidebar with Product Images -->
         <div class="sidebar sm:w-1/2 pb-8 sm:pb-16 flex-1 max-w-[90vw] sm:max-w-[35vw]">
-            <salla-slider id="details-slider-{{ product.id }}" type="thumbs" loop="true" auto-play pagination show-controls="false" style="height: 45vh;">
+            <salla-slider id="details-slider-{{ product.id }}" type="thumbs" loop="true" auto-play pagination show-controls="false" pagination style="height: 45vh;">
                 <div slot="items" class="flex flex-wrap">
                     {% for image in product.images %}
                         {% if image.three_d_image_url %}
