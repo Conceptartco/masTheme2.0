@@ -13,6 +13,26 @@
     <!-- Product Details Section -->
     <div class="flex flex-col sm:flex-row gap-4 items-center sm:items-start justify-center" id="product-{{ product.id }}">
         
+        <!-- Sidebar -->
+        <div class="sidebar sm:w-1/2 pb-8 sm:pb-16 flex-1 max-w-[90vw] sm:max-w-[35vw]">
+            <salla-slider id="details-slider-{{ product.id }}" pagination type="thumbs" loop="true" auto-play pagination show-controls="false" style="height: 45vh;">
+                <div slot="items" class="flex flex-wrap">
+                    {% for image in product.images %}
+                        {% if image.three_d_image_url %}
+                            <model-viewer style="height: 50%; width: 50%;" class="swiper-slide model-entry w-full h-full" loading="eager" camera-controls touch-action="pan-y" auto-rotate poster="{{ image.url }}" src="{{ image.three_d_image_url }}" shadow-intensity="1" alt="{{ image.alt }}"></model-viewer>
+                        {% else %}
+                            <a data-fslightbox="product_{{ product.id }}" data-img-id="{{ image.id }}" data-slid-index="{{ loop.index-1 }}" {% if image.video_url %} data-video-src="{{ image.video_url }}" {% endif %} data-caption="{{ image.alt }}" data-infinite="false" data-type="{{ image.video_url?'youtube':'image' }}" href="{{ image.video_url?image.video_url:image.url }}" aria-label="{{ product.name }}" class="swiper-slide magnify-wrapper homeslider__slide {{ image.video_url?'video-entry':'' }} w-full h-full">
+                                {% if loop.first %}
+                                    <img id="{{image.id}}" fetchpriority="high" loading="eager" src="{{ image.url }}" alt="{{ image.alt }}" class="h-full object-cover w-full">
+                                {% else %}
+                                    <img id="{{image.id}}" src="{{ 'images/s-empty.png' | cdn }}" data-src="{{ image.url }}" alt="{{ image.alt }}" class="lazy h-full object-cover w-full">
+                                {% endif %}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </salla-slider>
+        </div>
         <!-- Product Description -->
         <div class="main-content w-full sm:w-1/2 flex-1 max-w-[90vw] sm:max-w-[35vw]">
             {% hook 'product:single.description.start' %}
@@ -95,28 +115,6 @@
             </form>
             
             {% hook 'product:single.description.end' %}
-        </div>
-        
-        
-        <!-- Sidebar -->
-        <div class="sidebar sm:w-1/2 pb-8 sm:pb-16 flex-1 max-w-[90vw] sm:max-w-[35vw]">
-            <salla-slider id="details-slider-{{ product.id }}" pagination type="thumbs" loop="true" auto-play pagination show-controls="false" style="height: 45vh;">
-                <div slot="items" class="flex flex-wrap">
-                    {% for image in product.images %}
-                        {% if image.three_d_image_url %}
-                            <model-viewer style="height: 50%; width: 50%;" class="swiper-slide model-entry w-full h-full" loading="eager" camera-controls touch-action="pan-y" auto-rotate poster="{{ image.url }}" src="{{ image.three_d_image_url }}" shadow-intensity="1" alt="{{ image.alt }}"></model-viewer>
-                        {% else %}
-                            <a data-fslightbox="product_{{ product.id }}" data-img-id="{{ image.id }}" data-slid-index="{{ loop.index-1 }}" {% if image.video_url %} data-video-src="{{ image.video_url }}" {% endif %} data-caption="{{ image.alt }}" data-infinite="false" data-type="{{ image.video_url?'youtube':'image' }}" href="{{ image.video_url?image.video_url:image.url }}" aria-label="{{ product.name }}" class="swiper-slide magnify-wrapper homeslider__slide {{ image.video_url?'video-entry':'' }} w-full h-full">
-                                {% if loop.first %}
-                                    <img id="{{image.id}}" fetchpriority="high" loading="eager" src="{{ image.url }}" alt="{{ image.alt }}" class="h-full object-cover w-full">
-                                {% else %}
-                                    <img id="{{image.id}}" src="{{ 'images/s-empty.png' | cdn }}" data-src="{{ image.url }}" alt="{{ image.alt }}" class="lazy h-full object-cover w-full">
-                                {% endif %}
-                            </a>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </salla-slider>
         </div>
     </div>
 </div>
