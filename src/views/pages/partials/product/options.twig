@@ -59,6 +59,7 @@
 {% endif %}
 
 {% block script %}
+<script>
 function updateSliderValue(optionId) {
     var slider = document.getElementById('option-' + optionId);
     var valueSpan = document.getElementById('slider-value-' + optionId);
@@ -94,5 +95,6 @@ function updateSliderValue(optionId) {
         }
     }
 }
+</script>
 
 {% endblock %}
