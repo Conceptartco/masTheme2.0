@@ -7,7 +7,7 @@
                 <h2 class="text-2xl font-slim mb-2">{{ link.title }}</h2>
                 <a href="{{ link.url }}" class="block relative w-full h-full">
                     <img src="{{ link.link_img_before }}" alt="{{ link.title }}" class="w-full h-full object-contain transition-opacity duration-300 ease-in-out hover:opacity-0 absolute inset-0">
-                    <img src="{{ link.link_img_after }}" alt="{{ link.title }}" class="w-full h-full object-contain absolute inset-0 opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100">
+                    <img src="{{ link.link_img_after }}" alt="{{ link.title }}" class="w-full h-full object-contain absolute">
                 </a>
             </div>
             {% endif %}
