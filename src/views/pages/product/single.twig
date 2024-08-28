@@ -136,19 +136,25 @@
 					<!-- Display Product Options -->
 					{% include 'pages.partials.product.options' %}
 
-					{# Price #}
-                <div class="flex whitespace-nowrap gap-4 items-center">
-                  <div class="{{ product.is_on_sale ? '' : 'hidden' }} space-x-2 rtl:space-x-reverse whitespace-nowrap">
-                      <h4 class="text-red-800 font-bold text-xl inline-block">{{product.sale_price|money}}</h4>
-                      <span class="text-gray-500 line-through">{{product.regular_price|money}}</span>
-                  </div>
-                  <div class="gap-4 {{ product.is_on_sale ? 'hidden' : 'flex' }}">
-                      {% if product.starting_price %} 
-                          <span class="">{{ trans('pages.products.starting_price') }}</span>
-                      {% endif %} 
-                          <h2 class=" font-bold text-xl inline-block"> {{product.starting_price ? product.starting_price|money : product.price|money }}</h2>
-                  </div>
-                </div>
+					{# Price Section #}
+						<div class="flex items-center justify-center gap-4 whitespace-nowrap">
+							{% if product.is_on_sale %}
+								<div class="flex items-baseline space-x-2 rtl:space-x-reverse">
+									<h4 class="text-red-800 font-bold text-2xl">{{ product.sale_price|money }}</h4>
+									<span class="text-gray-500 line-through text-xl">{{ product.regular_price|money }}</span>
+								</div>
+							{% else %}
+								<div class="flex items-baseline space-x-2 rtl:space-x-reverse">
+									{% if product.starting_price %}
+										<span class="text-gray-700 text-xl">{{ trans('pages.products.starting_price') }}</span>
+									{% endif %}
+									<h2 class="text-gray-900 font-bold text-2xl">
+										{{ product.starting_price ? product.starting_price|money : product.price|money }}
+									</h2>
+								</div>
+							{% endif %}
+						</div>
+
 
 
 					{% hook 'product:single.form.end' %}
