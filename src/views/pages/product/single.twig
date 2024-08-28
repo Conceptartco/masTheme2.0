@@ -136,20 +136,19 @@
 					<!-- Display Product Options -->
 					{% include 'pages.partials.product.options' %}
 
-					<!-- Display Product Price -->
-					{% if product.is_on_sale %}
-						<div class="product-price">
-							<h4>{{ product.sale_price|money }}</h4>
-							<span class="regular-price">{{ product.regular_price|money }}</span>
-						</div>
-						<div class="discount-ends">
-							<span>{{ trans('pages.products.discount_ends') }}: {{ product.discount_ends }}</span>
-						</div>
-					{% else %}
-						<div class="product-price">
-							<h4>{{ product.price|money }}</h4>
-						</div>
-					{% endif %}
+					{# Price #}
+                <div class="flex whitespace-nowrap gap-4 items-center">
+                  <div class="{{ product.is_on_sale ? '' : 'hidden' }} space-x-2 rtl:space-x-reverse whitespace-nowrap">
+                      <h4 class="text-red-800 font-bold text-xl inline-block">{{product.sale_price|money}}</h4>
+                      <span class="text-gray-500 line-through">{{product.regular_price|money}}</span>
+                  </div>
+                  <div class="gap-4 {{ product.is_on_sale ? 'hidden' : 'flex' }}">
+                      {% if product.starting_price %} 
+                          <span class="">{{ trans('pages.products.starting_price') }}</span>
+                      {% endif %} 
+                          <h2 class=" font-bold text-xl inline-block"> {{product.starting_price ? product.starting_price|money : product.price|money }}</h2>
+                  </div>
+                </div>
 
 
 					{% hook 'product:single.form.end' %}
