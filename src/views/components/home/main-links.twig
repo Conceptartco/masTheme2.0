@@ -4,7 +4,7 @@
         {% for link in component.links %}
             {% if link.title %}
             <div class="relative text-center">
-                <a href="{{ link.url }}" class="block relative w-40 h-40 mx-auto">
+                <a href="{{ link.url }}" class="block relative main-links-img w-40 h-40 mx-auto">
                     <div class="relative w-40 h-40 rounded-full overflow-hidden">
                         <img src="{{ link.link_img_before }}" alt="{{ link.title }}" class="w-full h-full object-cover absolute inset-0 transition-opacity duration-300 ease-in-out">
                         <img src="{{ link.link_img_after }}" alt="{{ link.title }}" class="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-300 ease-in-out">
@@ -18,10 +18,10 @@
 </section>
 {% block style %}
 <style>
-.relative:hover img:first-child {
+.main-links-img:hover img:first-child {
     opacity: 0;
 }
-.relative:hover img:last-child {
+.main-links-img:hover img:last-child {
     opacity: 1;
 }
 </style>
