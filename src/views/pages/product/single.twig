@@ -137,24 +137,26 @@
 					{% include 'pages.partials.product.options' %}
 
 					{# Price Section #}
-						 <div class="space-y-1">
-							<h1 class="text-gray-900 leading-6 text-lg">
-								<a href="{{ item.url }}" class="text-base">{{ item.product_name }}</a>
-							</h1>
-							<span class="text-sm text-gray-500 line-through item-regular-price {{ item.offer?'':'hidden' }}">{{ item.product_price|money }}</span>
-							<span class="item-price {{ item.offer?'text-red-800':'text-sm text-gray-500' }}">{{ item.price|money }}</span>
-							{% if item.weight_label %}
-							<p class="text-sm text-gray-500 "> {{ trans('pages.products.weight') }}
-								<span>{{ item.weight_label }}</span>
-							</p>
+						<div class="flex items-center justify-center gap-4 whitespace-nowrap">
+							{% if product.is_on_sale %}
+								<div class="flex items-baseline space-x-2 rtl:space-x-reverse">
+									<h4 class="text-red-800 font-bold text-2xl">{{ product.price|money }}</h4>
+									<span class="text-gray-500 line-through text-xl">{{ product.price|money }}</span>
+								</div>
+							{% else %}
+								<div class="flex items-baseline space-x-2 rtl:space-x-reverse">
+									{% if product.price %}
+										<span class="text-gray-700 text-xl">{{ trans('pages.products.price') }}</span>
+									{% endif %}
+									<h2 class="text-gray-900 font-bold text-2xl">
+										{{ product.price ? product.price|money : product.price|money }}
+									</h2>
+								</div>
 							{% endif %}
-							<i class="sicon-discount-calculator text-gray-500 offer-icon {{ item.offer?'':'hidden' }}"></i>
-							<span class="text-sm text-gray-500 offer-name {{ item.offer?'':'hidden' }}">{{ item.offer.names }}</span>
 						</div>
 
 
 
-					{% hook 'product:single.form.end' %}
 
 					<!-- Add to Cart Button -->
 					<section class="text-center mt-10">
