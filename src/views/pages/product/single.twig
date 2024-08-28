@@ -138,21 +138,10 @@
 
 					{# Price Section #}
 						<div class="flex items-center justify-center gap-4 whitespace-nowrap">
-							{% if product.is_on_sale %}
-								<div class="flex items-baseline space-x-2 rtl:space-x-reverse">
-									<h4 class="text-red-800 font-bold text-2xl">{{ product.sale_price  |money }}</h4>
-									<span class="text-gray-500 line-through text-xl">{{ product.sale_price  |money }}</span>
-								</div>
-							{% else %}
-								<div class="flex items-baseline space-x-2 rtl:space-x-reverse">
-									{% if product.sale_price   %}
-										<span class="text-gray-700 text-xl">{{ trans('pages.products.sale_price  ') }}</span>
-									{% endif %}
-									<h2 class="text-gray-900 font-bold text-2xl">
-										{{ product.sale_price   ? product.sale_price  |money : product.sale_price  |money }}
-									</h2>
-								</div>
-							{% endif %}
+							<div class="flex items-baseline space-x-2 rtl:space-x-reverse">
+								<h4 class="text-red-800 font-bold text-2xl">{{ product.price  |money }}</h4>
+								<span class="text-gray-500 line-through text-xl">{{ product.price  |money }}</span>
+							</div>
 						</div>
 
 					<!-- Add to Cart Button -->
