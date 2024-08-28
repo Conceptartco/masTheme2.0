@@ -106,7 +106,19 @@
     					<div class="text-2xl font-slim inline-block">{{ product.promotion_title }}</div>
     				{% endif %}
     			</div>
-
+				{# Price #}
+                <div class="flex whitespace-nowrap gap-4 items-center">
+                  <div class="{{ product.is_on_sale ? '' : 'hidden' }} space-x-2 rtl:space-x-reverse whitespace-nowrap">
+                      <h4 class="text-red-800 font-bold text-xl inline-block">{{product.sale_price|money}}</h4>
+                      <span class="text-gray-500 line-through">{{product.regular_price|money}}</span>
+                  </div>
+                  <div class="gap-4 {{ product.is_on_sale ? 'hidden' : 'flex' }}">
+                      {% if product.starting_price %} 
+                          <span class="">{{ trans('pages.products.starting_price') }}</span>
+                      {% endif %} 
+                          <h2 class=" font-bold text-xl inline-block"> {{product.starting_price ? product.starting_price|money : product.price|money }}</h2>
+                  </div>
+                </div>
     			<!-- Product Description -->
     			<div class="product__description text-xl sm:text-2xl p-2 px-5 sm:p-1 leading-7 mb-3 text-center max-w-[90vw] sm:max-w-[35vw] mx-auto">
     				{% set product_desc = product.description|replace({"&nbsp;":"\n"}) %}
@@ -124,19 +136,7 @@
     					</article>
     				{% endif %}
     			</div>
-				{# Price #}
-                <div class="flex whitespace-nowrap gap-4 items-center">
-                  <div class="{{ product.is_on_sale ? '' : 'hidden' }} space-x-2 rtl:space-x-reverse whitespace-nowrap">
-                      <h4 class="text-red-800 font-bold text-xl inline-block">{{product.sale_price|money}}</h4>
-                      <span class="text-gray-500 line-through">{{product.regular_price|money}}</span>
-                  </div>
-                  <div class="gap-4 {{ product.is_on_sale ? 'hidden' : 'flex' }}">
-                      {% if product.starting_price %} 
-                          <span class="">{{ trans('pages.products.starting_price') }}</span>
-                      {% endif %} 
-                          <h2 class=" font-bold text-xl inline-block"> {{product.starting_price ? product.starting_price|money : product.price|money }}</h2>
-                  </div>
-                </div>
+				
 
     			{% hook 'product:single.description' %}
 
@@ -146,8 +146,10 @@
 
     				{% hook 'product:single.form.start' %}
 
-    				<!-- Display Product Options -->
+    				
     				{% include 'pages.partials.product.options' %}
+
+					{% hook 'product:single.form.end' %}
 
     				<!-- Add to Cart Button -->
     				<section class="text-center mt-10">
