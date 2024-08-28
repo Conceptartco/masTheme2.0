@@ -87,42 +87,6 @@
                         </button>
                     {% endif %}
                 </div>
-
-                {% if product.can_add_note %}
-                    <div class="h-0 overflow-hidden opacity-0 is-closed" id="note_{{ product.id }}">
-                        <div class="pt-4">
-                          <textarea
-                                  class="animated animatedfadeInDown fadeInDown form-input h-16 bg-gray-50 block"
-                                  placeholder="{{ trans('pages.products.notes_placeholder') }}"
-                                  name="notes"
-                                  cols="30"
-                                  rows="10">{{ product.notes }}</textarea>
-                        </div>
-                    </div>
-                {% endif %}
-
-                {% if product.can_upload_file %}
-                    {# Notice that "product" is actually cart.items[*], so {product.id} is {item.id} #}
-                    <div class="h-0 overflow-hidden opacity-0 is-closed" id="file_{{ product.id }}">
-                        <div class="pt-4 px-1">
-                            <salla-file-upload
-                                accept="image/png, image/jpeg, image/jpg, image/gif, video/*, application/pdf"
-                                class="product-option-uploader"
-                                    {% if is_page('cart') %}
-                                        files="{{ product.attachments|json_encode }}"
-                                        cart-item-id="{{ product.id }}"
-                                    {% endif %}>
-                                <div class="product-option-uploader-placholder">
-                                    <span class="product-option-uploader-placholder-icon">
-                                        <i class="sicon-camera"></i>
-                                    </span>
-                                    <p class="profile-filepond-placholder-text">{{ trans('common.uploader.drag_and_drop') }}</p>
-                                    <span class="filepond--label-action">{{ trans('common.uploader.browse') }}</span>
-                                </div>
-                            </salla-file-upload>
-                        </div>
-                    </div>
-                {% endif %}
             </div>
         </div>
     </section>
