@@ -110,6 +110,12 @@
                         <div class="out-of-stock min-h-7 leading-7 hidden text-base text-red-600 !opacity-50 font-bold">
                             {{ trans('pages.products.out_of_stock') }}
                         </div>
+                        <div class="flex justify-center">
+    						<button class="custom-product-card-add-to-cart-btn" aria-label="Add to wishlist" onclick="salla.wishlist.toggle({{ product.id }})">
+    							أضف الى السلة
+    							<i class="fas fa-shopping-cart mr-2"></i>
+    						</button>
+    					</div>
                     </div>
                 </section>
             </form>
