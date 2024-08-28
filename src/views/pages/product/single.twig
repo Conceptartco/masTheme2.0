@@ -133,7 +133,7 @@
     			{% hook 'product:single.description' %}
 
     			<!-- Product Form -->
-    			<form class="form product-form text-center max-w-[90vw] sm:max-w-[35vw] mx-auto"  onchange="salla.form.onChange('cart.updateItem', event)" enctype="multipart/form-data" method="post" onsubmit="return salla.form.onSubmit('cart.addItem', event)">
+    			<form class="form product-form text-center max-w-[90vw] sm:max-w-[35vw] mx-auto"  onchange="salla.product.getPrice(new FormData(event.currentTarget))" enctype="multipart/form-data" method="post" onsubmit="return salla.form.onSubmit('cart.addItem', event)">
     				<input type="hidden" name="id" value="{{ product.id }}">
 
     				{% hook 'product:single.form.start' %}
@@ -142,7 +142,7 @@
     				{% include 'pages.partials.product.options' %}
 
 					{% hook 'product:single.form.end' %}
-
+ 						<h4>{{ product.price|money }}</h4>
     				<!-- Add to Cart Button -->
     				<section class="text-center mt-10">
     					<div class="flex justify-center">
