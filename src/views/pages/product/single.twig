@@ -83,190 +83,126 @@
 #}
 {% extends "layouts.master" %}
 {% block content %}
-    <div class="container">
-        <nav class="breadcrumbs w-full py-5">
-            <salla-breadcrumb></salla-breadcrumb>
-        </nav>
-        <div class="flex flex-col items-start md:flex-row" id="product-{{ product.id }}">
-            <div class="sidebar md:sticky top-24 w-full md:!w-2/4 rtl:ml-8 ltr:mr-8 pb-8 md:pb-16 overflow-hidden shrink-0">
-                {% set has_many_images = product.images|length > 1 %}
-                <salla-slider
-                        id="details-slider-{{ product.id }}"
-                        class="details-slider rounded-md image-slider"
-                        type="thumbs"
-                        loop="false"
-                        auto-height
-                        listen-to-thumbnails-option
-                        show-thumbs-controls="false">
-                    {% if product.promotion_title %}
-                        <div class="promotion-title">{{ product.promotion_title }}</div>
-                    {% endif %}
+<div class="container overflow-hidden">
 
-                    <salla-button
-                            class="btn--wishlist animated sws"
-                            data-id="{{ product.id }}"
-                            onclick="salla.wishlist.toggle({{ product.id }})"
-                            shape="icon"
-                            fill="outline"
-                            color="light">
-                        <i class="sicon-heart"></i>
-                    </salla-button>
+		<h1 class="font-slim text-4xl sm:text-7xl rtl:pl-3 ltr:pr-3" id="page-main-title">{{ page.title|raw }}</h1>
 
-                    {% if product.calories %}
-                        <div class="absolute z-[2] top-4 rtl:left-4 ltr:right-4 bg-white shadow-sm flex flex-col justify-center items-center rounded-full w-20 h-20 md:w-24 md:h-24">
-                            <span class="text-red-500 text-xl leading-none font-bold">{{ product.calories }}</span>
-                            <span class="text-xs text-gray-500">{{ trans('pages.products.calories') }}</span>
-                        </div>
-                    {% endif %}
+    	<!-- Custom Main Menu -->
+    	<custom-main-menu class="text-xl sm:text-2xl"></custom-main-menu>
 
-                    <div slot="items">
-                        {% for image in product.images %}
-                            {% if image.three_d_image_url %}
-                                <model-viewer style="min-height: 500px;" class="swiper-slide model-entry w-full h-full"
-                                    loading="eager" camera-controls
-                                    touch-action="pan-y" auto-rotate
-                                    poster="{{ image.url }}"
-                                    src="{{ image.three_d_image_url }}"
-                                    shadow-intensity="1" alt="{{ image.alt }}">
-                                </model-viewer>
-                            {% else %}
-                                <a data-fslightbox="product_{{ product.id }}"
-                                   data-img-id="{{ image.id }}"
-                                   data-slid-index="{{ loop.index-1 }}"{% if image.video_url %} data-video-src="{{ image.video_url }}"{% endif %}
-                                   data-caption="{{ image.alt }}"
-                                   data-infinite="false"
-                                   data-type="{{ image.video_url?'youtube':'image' }}"
-                                   href="{{ image.video_url?image.video_url:image.url }}"
-                                   aria-label="{{ product.name }}"
-                                   class="swiper-slide magnify-wrapper homeslider__slide {{ image.video_url?'video-entry':'' }}">
-                                    {% if loop.first %}
-                                        <img id="{{image.id}}" fetchpriority="high" loading="eager" src="{{ image.url }}"
-                                             alt="{{ image.alt }}"
-                                             class="h-full object-{{ theme.settings.get('slider_background_size') }} w-full {{ image.three_d_image_url ? 'model-poster' : '' }}">
-                                    {% else %}
-                                        <img id="{{image.id}}" src="{{ 'images/s-empty.png' | cdn }}" data-src="{{ image.url }}"
-                                             alt="{{ image.alt }}"
-                                             class="lazy h-full object-{{ theme.settings.get('slider_background_size') }} w-full {{ image.three_d_image_url ? 'model-poster' : '' }}">
-                                    {% endif %}
-                                </a>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
+    	<div
+    		class="flex flex-col sm:flex-row gap-4 items-center sm:items-start justify-center" id="product-{{ product.id }}">
 
-                    {% if has_many_images %}
-                        <div slot="thumbs">
-                            {% for image in product.images %}
-                                <div class="slide--one-fourth {{ image.video_url?'video-entry':'' }} {{ image.three_d_image_url?'model-entry':'' }}">
-                                    {% if loop.index < 5 %}
-                                        <img src="{{ image.url }}"
-                                             loading="eager"
-                                             class="object-cover w-full h-full bg-gray-100 rounded-md overflow-hidden"
-                                             title="{{ image.alt }}"
-                                             alt="{{ image.alt }}"/>
-                                    {% else %}
-                                        <img data-src="{{ image.url }}" src="{{ 'images/s-empty.png' | cdn }}"
-                                             class="object-cover w-full h-full lazy bg-gray-100 rounded-md overflow-hidden"
-                                             title="{{ image.alt }}"
-                                             alt="{{ image.alt }}"/>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </salla-slider>
-            </div>
+    		<!-- Main Content -->
+    		<div class="main-content w-full sm:w-1/2 flex-1 max-w-[90vw] sm:max-w-[35vw]">
 
-            <div class="main-content md:sticky md:overflow-hidden top-24 w-full md:w-2/4 md:pb-16">
+    			{% hook 'product:single.description.start' %}
 
-                {% hook 'product:single.description.start' %}
+    			<!-- Product Header -->
+    			<div class="text-center mb-4">
+    				<h1 class="text-4xl sm:text-3xl leading-10 font-slim inline-block">{{ product.name }}</h1>
+    				<span class="inline-block mx-4 border-b border-[#a5804a] w-[110px]"></span>
+    				{% if product.promotion_title %}
+    					<div class="text-2xl font-slim inline-block">{{ product.promotion_title }}</div>
+    				{% endif %}
+    			</div>
+				
+    			<!-- Product Description -->
+    			<div class="product__description text-xl sm:text-2xl p-2 px-5 sm:p-1 leading-7 mb-3 text-center max-w-[90vw] sm:max-w-[35vw] mx-auto">
+    				{% set product_desc = product.description|replace({"&nbsp;":"\n"}) %}
+    				{% if product.has_read_more %}
+    					<article class="article article--main relative leading-8 overflow-hidden transition-all duration-300 py-4 max-h-[5.25rem]" id="more-content">
+    						{{ product_desc|raw }}
+    					</article>
+    					<!-- Read More Button -->
+    					<a id="btn-show-more" class="link--primary inline-block mt-2 cursor-pointer">
+    						{{ trans('pages.products.read_more') }}
+    					</a>
+    				{% else %}
+    					<article class="article--main pb-1">
+    						{{ product_desc|raw }}
+    					</article>
+    				{% endif %}
+    			</div>
+				
+				{# Price #}
+					<div class="flex whitespace-nowrap gap-4 items-center">
+						{# Check if the product is on sale #}
+						<div class="{{ product.is_on_sale ? '' : 'hidden' }} space-x-2 rtl:space-x-reverse whitespace-nowrap">
+							<h4 class="text-red-800 font-bold text-xl inline-block">{{ product.sale_price|money }}</h4>
+							<span class="text-gray-500 line-through">{{ product.regular_price|money }}</span>
+						</div>
+						{# If not on sale, show the starting price or regular price #}
+						<div class="gap-4 {{ product.is_on_sale ? 'hidden' : 'flex' }}">
+							{% if product.starting_price %}
+								<span class="">{{ trans('pages.products.starting_price') }}</span>
+							{% endif %}
+							<h2 class="font-bold text-xl inline-block">
+								{{ product.starting_price ? product.starting_price|money : product.price|money }}
+							</h2>
+						</div>
+					</div>
 
-                {% if product.brand.name %}
-                    <div class="product-brand mb-5 w-12">
-                        <a class="brand-logo" href="{{ product.brand.url }}" title="{{ product.brand.name }}">
-                            <img width="100%" height="100%" class="max-h-full object-contain"
-                                 src="{{ product.brand.logo }}"
-                                 title="{{ product.brand.name }}"
-                                 alt="{{ product.brand.name }}">
-                        </a>
-                    </div>
-                {% endif %}
+    			{% hook 'product:single.description' %}
 
-                {% if product.is_taxable %}
-                    <small class="color-grey">{{ trans('pages.products.tax_included') }}</small>
-                {% endif %}
+    			<!-- Product Form -->
+    			<form class="form product-form text-center max-w-[90vw] sm:max-w-[35vw] mx-auto" enctype="multipart/form-data" method="post" onsubmit="return salla.form.onSubmit('cart.addItem', event)">
+    				<input type="hidden" name="id" value="{{ product.id }}">
 
-                <h1 class="text-xl md:text-2xl leading-10 font-bold mb-6 text-gray-800">{{ product.name }}</h1>
+    				{% hook 'product:single.form.start' %}
 
-                {% if product.subtitle %}
-                    <h2 class="product-entry__sub-title text-sm text-gray-500 leading-6 mb-2.5">
-                        {{ product.subtitle }}
-                    </h2>
-                {% endif %}
+    				
+    				{% include 'pages.partials.product.options' %}
 
-                {% if product.rating %}
-                    <salla-rating-stars value="{{ product.rating.stars }}"
-                                        reviews="{{ product.rating.count }}"></salla-rating-stars>
-                {% endif %}
+					{% hook 'product:single.form.end' %}
 
-                {# Price #}
-                <div class="flex whitespace-nowrap gap-4 items-center">
-                    {# Check if the product is on sale #}
-                    <div class="{{ product.is_on_sale ? '' : 'hidden' }} space-x-2 rtl:space-x-reverse whitespace-nowrap">
-                        <h4 class="text-red-800 font-bold text-xl inline-block">{{ product.sale_price|money }}</h4>
-                        <span class="text-gray-500 line-through">{{ product.regular_price|money }}</span>
-                    </div>
-                    {# If not on sale, show the starting price or regular price #}
-                    <div class="gap-4 {{ product.is_on_sale ? 'hidden' : 'flex' }}">
-                        {% if product.starting_price %}
-                            <span class="">{{ trans('pages.products.starting_price') }}</span>
-                        {% endif %}
-                        <h2 class="font-bold text-xl inline-block">
-                            {{ product.starting_price ? product.starting_price|money : product.price|money }}
-                        </h2>
-                    </div>
-                </div>
+    				<!-- Add to Cart Button -->
+    				<section class="text-center mt-10">
+    					<div class="flex justify-center">
+    						<button class="custom-product-card-add-to-cart-btn" aria-label="Add to wishlist" onclick="salla.wishlist.toggle({{ product.id }})">
+    							أضف الى السلة
+    							<i class="fas fa-shopping-cart mr-2"></i>
+    						</button>
+    					</div>
+    				</section>
+    			</form>
 
-                <div class="product__description p-2 px-5 sm:p-1 leading-7 mb-3">
-                    {% set product_desc = product.description|replace({"&nbsp;":"\n"}) %}
-                    {% if product.has_read_more %}
-                        <article class="article article--main relative leading-8 overflow-hidden transition-all max-h-0 duration-300 py-4"
-                            id="more-content" style="max-height:5.25rem">
-                            {{ product_desc|raw }}
-                        </article>
+    			{% hook 'product:single.description.end' %}
 
-                        <a id="btn-show-more" class="link--primary inline-block mt-2 cursor-pointer">
-                            {{ trans('pages.products.read_more') }}
-                        </a>
-                    {% else %}
-                        <article class="article--main pb-1">
-                            {{ product_desc|raw }}
-                        </article>
-                    {% endif %}
-                </div>
+    		</div>
 
-                {% if product.tags|length and theme.settings.get('show_tags', true) %}
-                    <div class="mb-3">
-                        {% for tag in product.tags %}
-                            <a href="{{ tag.url }}"
-                               class="rtl:ml-2 ltr:mr-2 inline-flex text-gray-500 hover:text-primary underline text-sm mb-1">{{ tag.name }},
-                            </a>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+    		<!-- Sidebar -->
+    		<div class="sidebar sm:w-1/2 pb-8 sm:pb-16 flex-1 max-w-[90vw] sm:max-w-[35vw]">
+    			<salla-slider id="details-slider-{{ product.id }}" type="thumbs" loop="true" auto-play pagination show-controls="false" style="height: 45vh;">
+    				<div slot="items" class="flex flex-wrap">
+    					{% for image in product.images %}
+    						{% if image.three_d_image_url %}
+    							<model-viewer style="height: 50%; width: 50%;" class="swiper-slide model-entry w-full h-full" loading="eager" camera-controls touch-action="pan-y" auto-rotate poster="{{ image.url }}" src="{{ image.three_d_image_url }}" shadow-intensity="1" alt="{{ image.alt }}"></model-viewer>
+    						{% else %}
+    							<a data-fslightbox="product_{{ product.id }}" data-img-id="{{ image.id }}" data-slid-index="{{ loop.index-1 }}" {% if image.video_url %} data-video-src="{{ image.video_url }}" {% endif %} data-caption="{{ image.alt }}" data-infinite="false" data-type="{{ image.video_url?'youtube':'image' }}" href="{{ image.video_url?image.video_url:image.url }}" aria-label="{{ product.name }}" class="swiper-slide magnify-wrapper homeslider__slide {{ image.video_url?'video-entry':'' }} w-full h-full">
+    								{% if loop.first %}
+    									<img id="{{image.id}}" fetchpriority="high" loading="eager" src="{{ image.url }}" alt="{{ image.alt }}" class="h-full object-cover w-full">
+    								{% else %}
+    									<img id="{{image.id}}" src="{{ 'images/s-empty.png' | cdn }}" data-src="{{ image.url }}" alt="{{ image.alt }}" class="lazy h-full object-cover w-full">
+    								{% endif %}
+    							</a>
+    						{% endif %}
+    					{% endfor %}
+    				</div>
+    			</salla-slider>
+    		</div>
 
-                {% if product.is_sold_out %}
-                    <div class="alert alert--warning mb-3">
-                        {{ trans('pages.products.sold_out') }}
-                    </div>
-                {% endif %}
+    	</div>
 
-                {% hook 'product:single.form.start' %}
 
-                <salla-product-form :product="{{ product|json_encode() }}"
-                                    :data="{{ product|json_encode() }}"></salla-product-form>
-
-                {% hook 'product:single.form.end' %}
-            </div>
-        </div>
+    	<!-- Related Products -->
+    	<div class="container p-4 sm:p-10">
+    		<div class="container my-10 text-right">
+    			<h2 class="text-xl sm:text-2xl mb-2 inline-block mr-4">منتجات قد تعجبك</h2>
+    			<div class="w-[20vw] sm:w-[10vw] h-[1px] bg-[#a5804a] inline-block"></div>
+    		</div>
+    		<salla-products-slider product-card-component="custom-salla-product-card" class="flex-1 min-w-0 overflow-auto " source="related" source-value="{{product.id}}" display-all-url></salla-products-slider>
+    	</div>
     </div>
+
 {% endblock %}
