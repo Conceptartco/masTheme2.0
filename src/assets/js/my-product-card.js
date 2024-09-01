@@ -231,4 +231,6 @@ class CustomProductCard extends HTMLElement {
   }
 }
 
-customElements.define('custom-salla-product-card', CustomProductCard);
+if (!customElements.get('custom-salla-product-card')) {
+  customElements.define('custom-salla-product-card', CustomProductCard);
+}
